@@ -1,24 +1,21 @@
 
-# 💍 Boda Rocío & Matías - Álbum Compartido
+# 💍 Álbum de Boda - Rocío & Matías
 
-Este es el repositorio oficial de los recuerdos de nuestra boda. Los invitados pueden subir fotos y videos que se guardan automáticamente en Cloudinary y se muestran en este muro digital.
+Esta versión está optimizada para funcionar **directamente en GitHub Pages** sin procesos de construcción.
 
-## 🚀 Cómo desplegar en GitHub Pages
+## 🚀 Cómo ponerlo online:
 
-Para que tu álbum esté online para todos tus invitados, sigue estos pasos:
-
-1. **Crear un repositorio en GitHub**: Crea un nuevo repositorio (ej: `boda-rocio-matias`) y sube todos estos archivos.
-2. **Configurar Cloudinary**: Asegúrate de que en `services/cloudService.ts` tu `CLOUD_NAME` sea `dzmwybq2v` y tu `UPLOAD_PRESET` sea el nombre del preset **Unsigned** que creaste.
-3. **Activar Pages**:
-   - En tu repositorio de GitHub, ve a **Settings** (Ajustes).
-   - En el menú izquierdo, haz clic en **Pages**.
-   - En "Build and deployment" > "Branch", selecciona la rama `main` y la carpeta `/(root)`.
-   - Haz clic en **Save**.
-4. **¡Listo!**: En unos minutos, GitHub te dará una URL (ej: `https://tu-usuario.github.io/boda-rocio-matias/`) que podrás compartir con tus invitados.
-
-## 🛠️ Notas Técnicas
-- **Almacenamiento**: Las imágenes se almacenan en Cloudinary usando *Contextual Metadata* para preservar los mensajes de los invitados sin necesidad de una base de datos externa.
-- **Offline Ready**: La aplicación es una SPA (Single Page Application) que funciona directamente en el navegador.
+1. **Limpia tu Repo**: Borra los archivos `package.json`, `vite.config.ts`, `package-lock.json` y la carpeta `.github` si los tienes. Solo causarán errores en esta versión.
+2. **Sube estos archivos**: Asegúrate de tener:
+   - `index.html`
+   - `index.tsx`
+   - `App.tsx`
+   - `types.ts`
+   - Carpetas `components/` y `services/` con sus archivos.
+3. **Activa Pages**:
+   - En GitHub: **Settings** > **Pages**.
+   - Branch: **main** / Folder: **/(root)**.
+   - ¡Listo! En 1 minuto tu web estará funcionando.
 
 ---
-*Felicidades Rocío y Matías por este gran paso.*
+*Felicidades por tu boda. Que este álbum guarde los mejores momentos.*
