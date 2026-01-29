@@ -1,10 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
-import Hero from './components/Hero';
-import Gallery from './components/Gallery';
-import UploadModal from './components/UploadModal';
-import { ViewMode, WeddingPhoto } from './types';
-import { subscribeToPhotos, savePhotoToCloud, isCloudActive } from './services/cloudService';
+import Hero from './components/Hero.tsx';
+import Gallery from './components/Gallery.tsx';
+import UploadModal from './components/UploadModal.tsx';
+import { ViewMode, WeddingPhoto } from './types.ts';
+import { subscribeToPhotos, savePhotoToCloud, isCloudActive } from './services/cloudService.ts';
 import { Heart, Camera, BookOpen, Code, Star, GitFork, Info, ChevronDown, Download, Plus, Cloud, CloudOff } from 'lucide-react';
 
 const App: React.FC = () => {
@@ -13,7 +13,6 @@ const App: React.FC = () => {
   const [showUpload, setShowUpload] = useState(false);
 
   useEffect(() => {
-    // Suscripción en tiempo real a la nube (Cloudinary)
     const unsubscribe = subscribeToPhotos((updatedPhotos) => {
       setPhotos(updatedPhotos);
     });
@@ -49,7 +48,6 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#f6f8fa] text-[#1f2328] font-sans pb-32">
-      {/* Estado de la Nube */}
       {!isCloudActive() && (
         <div className="bg-amber-50 border-b border-amber-200 px-4 py-2 text-center text-xs text-amber-700 font-medium flex items-center justify-center gap-2">
           <CloudOff className="w-3 h-3" />
@@ -57,7 +55,6 @@ const App: React.FC = () => {
         </div>
       )}
 
-      {/* Navbar Estilo GitHub */}
       <nav className="bg-white/80 backdrop-blur-md border-b border-[#d0d7de] pt-4 pb-2 sticky top-0 z-40">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap items-center justify-between gap-4">
@@ -97,7 +94,6 @@ const App: React.FC = () => {
         </div>
       </nav>
 
-      {/* BOTÓN FLOTANTE (FAB) ULTRA LLAMATIVO */}
       <div className="fixed bottom-10 right-6 md:right-12 z-50 group">
         <div className="absolute right-full mr-4 top-1/2 -translate-y-1/2 bg-rose-600 text-white px-4 py-2 rounded-lg text-sm font-bold shadow-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap hidden md:block">
           ¡Comparte tu foto o video aquí! ✨

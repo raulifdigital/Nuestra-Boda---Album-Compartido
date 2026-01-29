@@ -1,20 +1,12 @@
 
-import { WeddingPhoto } from '../types';
+import { WeddingPhoto } from '../types.ts';
 
-/**
- * CONFIGURACIÓN DE CLOUDINARY
- * Cloud Name: dzmwybq2v
- */
 const CLOUD_NAME = "dzmwybq2v"; 
 const UPLOAD_PRESET: string = "boda_preset"; 
 const WEDDING_TAG = "boda_rocio_matias";
 
 const isConfigured = UPLOAD_PRESET !== "TU_UPLOAD_PRESET_AQUÍ";
 
-/**
- * Limpia el texto para que sea seguro enviarlo como metadato a Cloudinary
- * (Evita que caracteres como '=' o '|' rompan la estructura de metadatos)
- */
 const sanitizeMetadata = (text: string) => {
   return text.replace(/[=|]/g, ' ').trim();
 };
@@ -28,17 +20,14 @@ export const subscribeToPhotos = (callback: (photos: WeddingPhoto[]) => void) =>
 
   const fetchPhotos = async () => {
     try {
-      // Importante: En Settings -> Security -> Restricted media types -> Desmarcar "Resource list"
       const response = await fetch(`https://res.cloudinary.com/${CLOUD_NAME}/image/list/${WEDDING_TAG}.json?t=${Date.now()}`);
       
       if (!response.ok) {
-        console.warn("Esperando que se habilite la 'Resource list' en Cloudinary o a que se suba la primera foto.");
         return;
       }
       
       const data = await response.json();
       const photos: WeddingPhoto[] = data.resources.map((res: any) => {
-        // Extraemos los metadatos guardados en el contexto
         const ctx = res.context?.custom || {};
         return {
           id: res.public_id,
@@ -50,9 +39,7 @@ export const subscribeToPhotos = (callback: (photos: WeddingPhoto[]) => void) =>
         };
       });
       
-      // Ordenar por fecha (más recientes primero)
       photos.sort((a, b) => b.timestamp - a.timestamp);
-      
       callback(photos);
     } catch (error) {
       console.error("Error al obtener fotos de Cloudinary:", error);
@@ -66,7 +53,6 @@ export const subscribeToPhotos = (callback: (photos: WeddingPhoto[]) => void) =>
 
 export const savePhotoToCloud = async (photo: { file: File; author: string; dedication: string }) => {
   if (!isConfigured) {
-    // Fallback para pruebas locales
     return new Promise((resolve) => {
       const reader = new FileReader();
       reader.readAsDataURL(photo.file);
@@ -92,7 +78,6 @@ export const savePhotoToCloud = async (photo: { file: File; author: string; dedi
   formData.append('upload_preset', UPLOAD_PRESET);
   formData.append('tags', WEDDING_TAG);
   
-  // Guardamos el contexto sanitizado
   const safeAuthor = sanitizeMetadata(photo.author);
   const safeDedication = sanitizeMetadata(photo.dedication);
   formData.append('context', `author=${safeAuthor}|dedication=${safeDedication}`);

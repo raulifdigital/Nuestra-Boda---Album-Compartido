@@ -1,5 +1,6 @@
+
 import React from 'react';
-import { WeddingPhoto } from '../types';
+import { WeddingPhoto } from '../types.ts';
 import { User, Clock, Tag, Download, MessageSquare, Video, Image as ImageIcon } from 'lucide-react';
 
 interface GalleryProps {
@@ -37,7 +38,6 @@ const Gallery: React.FC<GalleryProps> = ({ photos }) => {
           key={item.id} 
           className="group bg-white border border-[#d0d7de] rounded-lg overflow-hidden hover:border-[#afb8c1] transition-all duration-200 shadow-sm"
         >
-          {/* Header de la contribución */}
           <div className="bg-[#f6f8fa] border-b border-[#d0d7de] px-4 py-2.5 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <div className="w-6 h-6 rounded-full bg-rose-50 flex items-center justify-center border border-rose-100">
@@ -59,7 +59,6 @@ const Gallery: React.FC<GalleryProps> = ({ photos }) => {
           </div>
 
           <div className="flex flex-col lg:flex-row">
-            {/* Visualización Multimedia */}
             <div className="w-full lg:w-1/2 aspect-square bg-gray-100 relative group-hover:bg-gray-200 transition-colors border-r border-[#d0d7de]">
               {item.type === 'image' ? (
                 <img 
@@ -85,7 +84,6 @@ const Gallery: React.FC<GalleryProps> = ({ photos }) => {
               </button>
             </div>
 
-            {/* Mensaje e Información */}
             <div className="w-full lg:w-1/2 p-5 flex flex-col justify-between">
               <div>
                 <div className="flex items-center gap-2 mb-4 text-[#636c76]">
