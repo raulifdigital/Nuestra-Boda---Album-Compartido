@@ -1,21 +1,24 @@
 
-# 💍 Boda Rocío & Matías - Repositorio de Recuerdos
+# 💍 Boda Rocío & Matías - Álbum Compartido
 
-Este es el repositorio oficial de los momentos compartidos en la boda de **Rocío & Matías**, celebrada en **Casa de Campo Raulif** el 28 de febrero de 2026.
+Este es el repositorio oficial de los recuerdos de nuestra boda. Los invitados pueden subir fotos y videos que se guardan automáticamente en Cloudinary y se muestran en este muro digital.
 
-## 🚀 Características
-- **Potenciado por IA**: Generación de pies de foto automáticos usando Google Gemini 3 Flash.
-- **Álbum Compartido**: Los invitados pueden "colaborar" subiendo sus propios recuerdos.
-- **Diseño Responsivo**: Optimizado para dispositivos móviles para capturar momentos en tiempo real.
-- **Tecnologías**: React, Tailwind CSS, Lucide Icons y Google GenAI SDK.
+## 🚀 Cómo desplegar en GitHub Pages
 
-## 📅 Detalles del Evento
-- **Fecha**: 2026-02-28
-- **Lugar**: Casa de Campo Raulif, Curicó.
-- **Estado**: `Producción`
+Para que tu álbum esté online para todos tus invitados, sigue estos pasos:
 
-## 🛠️ Contribuciones
-Los invitados son bienvenidos a hacer "push" de sus fotos. Cada imagen es analizada por nuestra IA para capturar la esencia del momento de forma poética.
+1. **Crear un repositorio en GitHub**: Crea un nuevo repositorio (ej: `boda-rocio-matias`) y sube todos estos archivos.
+2. **Configurar Cloudinary**: Asegúrate de que en `services/cloudService.ts` tu `CLOUD_NAME` sea `dzmwybq2v` y tu `UPLOAD_PRESET` sea el nombre del preset **Unsigned** que creaste.
+3. **Activar Pages**:
+   - En tu repositorio de GitHub, ve a **Settings** (Ajustes).
+   - En el menú izquierdo, haz clic en **Pages**.
+   - En "Build and deployment" > "Branch", selecciona la rama `main` y la carpeta `/(root)`.
+   - Haz clic en **Save**.
+4. **¡Listo!**: En unos minutos, GitHub te dará una URL (ej: `https://tu-usuario.github.io/boda-rocio-matias/`) que podrás compartir con tus invitados.
+
+## 🛠️ Notas Técnicas
+- **Almacenamiento**: Las imágenes se almacenan en Cloudinary usando *Contextual Metadata* para preservar los mensajes de los invitados sin necesidad de una base de datos externa.
+- **Offline Ready**: La aplicación es una SPA (Single Page Application) que funciona directamente en el navegador.
 
 ---
-*Hecho con ❤️ para Rocío y Matías.*
+*Felicidades Rocío y Matías por este gran paso.*

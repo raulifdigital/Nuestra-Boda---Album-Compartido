@@ -1,7 +1,6 @@
 
 import React, { useState, useRef } from 'react';
-import { Camera, X, Upload, Film, MessageSquareQuote, Check, Loader2, Sparkles } from 'lucide-react';
-import { generateWeddingCaption } from '../services/geminiService';
+import { Camera, X, Upload, Film, MessageSquareQuote, Check, Loader2 } from 'lucide-react';
 
 interface UploadModalProps {
   onClose: () => void;
@@ -14,7 +13,6 @@ const UploadModal: React.FC<UploadModalProps> = ({ onClose, onUpload }) => {
   const [author, setAuthor] = useState('');
   const [dedication, setDedication] = useState('');
   const [isUploading, setIsUploading] = useState(false);
-  const [isGenerating, setIsGenerating] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,25 +24,6 @@ const UploadModal: React.FC<UploadModalProps> = ({ onClose, onUpload }) => {
         setPreview(reader.result as string);
       };
       reader.readAsDataURL(selectedFile);
-    }
-  };
-
-  // Fix: Added handler to invoke Gemini AI for message inspiration
-  const handleAiGenerate = async () => {
-    if (!author) {
-      alert("Por favor, ingresa tu nombre para que la IA pueda personalizar tu mensaje.");
-      return;
-    }
-    setIsGenerating(true);
-    try {
-      const suggestion = await generateWeddingCaption(author);
-      if (suggestion) {
-        setDedication(suggestion);
-      }
-    } catch (error) {
-      console.error("Error generating dedication:", error);
-    } finally {
-      setIsGenerating(false);
     }
   };
 
@@ -135,20 +114,9 @@ const UploadModal: React.FC<UploadModalProps> = ({ onClose, onUpload }) => {
                 </div>
 
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <label className="text-xs font-bold text-gray-500 uppercase flex items-center gap-2">
-                      <MessageSquareQuote className="w-3 h-3" /> Tu Dedicatoria
-                    </label>
-                    <button 
-                      type="button"
-                      onClick={handleAiGenerate}
-                      disabled={isGenerating || isUploading || !author}
-                      className="text-[10px] font-bold text-rose-500 hover:text-rose-600 flex items-center gap-1 transition-colors disabled:opacity-40"
-                    >
-                      {isGenerating ? <Loader2 className="w-3 h-3 animate-spin" /> : <Sparkles className="w-3 h-3" />}
-                      INSPIRACIÓN AI
-                    </button>
-                  </div>
+                  <label className="text-xs font-bold text-gray-500 uppercase flex items-center gap-2">
+                    <MessageSquareQuote className="w-3 h-3" /> Tu Dedicatoria
+                  </label>
                   <textarea 
                     value={dedication}
                     onChange={(e) => setDedication(e.target.value)}
